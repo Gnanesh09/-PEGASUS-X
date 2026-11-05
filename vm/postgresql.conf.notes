@@ -1,0 +1,7 @@
+PostgreSQL VM configuration notes (do not blindly replace your whole config):
+1. Keep listen_addresses limited to the VM interface, e.g. 'localhost,192.168.56.10'.
+2. In pg_hba.conf, allow only the VirtualBox host-only subnet and require scram-sha-256.
+   Example: host pegasus_lab pegasus_app 192.168.56.1/32 scram-sha-256
+3. Do NOT allow 0.0.0.0/0 and do NOT use bridged networking.
+4. Restart PostgreSQL after making and reviewing configuration changes.
+5. The app's lab-check uses a read-only SELECT of current_database(), current_user and version().
